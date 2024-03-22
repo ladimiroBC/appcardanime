@@ -1,0 +1,85 @@
+<form *ngIf="formCard"
+[formGroup]="formCard"
+(ngSubmit)="sendForm()"
+id="formCard">
+  <div class="col-12"><br>
+    <input type="text"
+    class="form-control"
+    id="name"
+    placeholder="Name"
+    formControlName="name">
+  </div>
+  <div class="col-12 bg-danger"
+  *ngIf="formCard.get('name')?.touched &&
+  formCard.get('name')?.errors?.['required']">
+    Required field
+  </div>
+  <div class="col-12"><br>
+    <input type="text"
+    class="form-control"
+    id="autor"
+    placeholder="Author"
+    formControlName="autor">
+  </div>
+  <div class="col-12 bg-danger"
+  *ngIf="formCard.get('autor')?.touched
+  && formCard.get('autor')?.errors?.['required']">
+    Required field
+  </div>
+  <div class="col-12"><br>
+    <input type="text"
+    class="form-control"
+    id="launch"
+    placeholder="Launch"
+    formControlName="launch">
+  </div>
+  <div class="col-12 bg-danger"
+  *ngIf="formCard.get('launch')?.touched
+  && formCard.get('launch')?.errors?.['required']">
+    Required field
+  </div><br>
+  <div class="col-12">
+    <input type="text"
+    class="form-control"
+    id="gender"
+    placeholder="Gender"
+    formControlName="gender">
+  </div>
+  <div class="col-12 bg-danger"
+  *ngIf="formCard.get('gender')?.touched &&
+  formCard.get('gender')?.errors?.['required']">
+    Required field
+  </div><br>
+  <div class="col-12">
+    <input type="text"
+    class="form-control"
+    id="img"
+    placeholder="Image link"
+    formControlName="img">
+  </div>
+</form>
+<div class="modal-footer">
+  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+  <ng-container>
+    @if(actionCreateCard) {
+    <button type="submit"
+    (click)="sendFormCardCreate()"
+    form="formCard"
+    [disabled]="formCard.invalid"
+    class="btn btn-primary">
+    Create</button>
+    }
+  </ng-container>
+  <!--
+    <ng-container>
+    @if(actionUpdateInformationCard) {
+      <button type="submit"
+    (click)="getFormInformationCardUpdate()"
+    form="formInformationCard"
+    [disabled]="formInformationCard?.invalid"
+    class="btn btn-primary">
+    Edit</button>
+    }
+  </ng-container>
+  -->
+</div>

@@ -1,0 +1,35 @@
+<app-button
+[dataBsToggle]="optionsModal.dataBsToggle"
+[dataBsTarget]="optionsModal.dataBsTargetCreate">
+  <ng-container>
+    <span>{{optionsButton.btnCreate}}</span>
+  </ng-container>
+</app-button>
+<app-modal
+[idModal]="optionsModal.idModalCreate"
+[title]="optionsModal.titleCreate">
+  <ng-container form>
+    <app-form
+    [formCard]="form"
+    [actionCreateCard]="actions.actionCreateForm"
+    (formCreateCard)="submitCreatedForm($event)">
+    </app-form>
+  </ng-container>
+</app-modal>
+<div class="container">
+  <div class="row">
+    @for (item of cardsInformation; track $index) {
+      <div class="col-md-3">
+        <app-card
+        [linkImg]="item.img"
+        [altName]="item.name"
+        [name]="item.name">
+        </app-card>
+      </div>
+    }
+  </div>
+</div>
+
+
+
+
