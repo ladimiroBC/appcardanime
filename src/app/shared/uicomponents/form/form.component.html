@@ -1,5 +1,4 @@
-<form *ngIf="formCard"
-[formGroup]="formCard"
+<form [formGroup]="formCard"
 (ngSubmit)="sendForm()"
 id="formCard">
   <div class="col-12"><br>
@@ -70,16 +69,14 @@ id="formCard">
     Create</button>
     }
   </ng-container>
-  <!--
-    <ng-container>
-    @if(actionUpdateInformationCard) {
+  <ng-container>
+    @if(actionUpdateCard) {
       <button type="submit"
-    (click)="getFormInformationCardUpdate()"
+    (click)="sendFormUpdateCreate()"
     form="formInformationCard"
-    [disabled]="formInformationCard?.invalid"
+    [disabled]="formCard.invalid"
     class="btn btn-primary">
     Edit</button>
     }
   </ng-container>
-  -->
 </div>

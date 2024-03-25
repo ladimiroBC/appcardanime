@@ -1,8 +1,8 @@
 export interface InformationCard {
-  id: number;
-  name: string;
-  autor: string;
-  launch: string;
-  gender: string;
-  img: string;
+  id?: any;
+  name?: string;
+  autor?: string;
+  launch?: string;
+  gender?: string;
+  img?: string;
 }

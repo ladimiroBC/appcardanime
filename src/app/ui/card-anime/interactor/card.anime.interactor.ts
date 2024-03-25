@@ -23,13 +23,17 @@ export class CardAnimeInteractor implements CardAnimeInteractorLogic{
   processAllCardsInformation(): void {
     this._supabaseService.getAll()
       .then((data: InformationCard[]) => {
-        this._presenter.processResponseCards(data);
+        this._presenter.responseCards(data);
       })
-      .catch(() => this._presenter.errorMessages(this.errorMsn.errorGetAll));
+      .catch(() => this._presenter.responseErrorMessages(this.errorMsn.errorGetAll));
   }
 
   processUpdateCardInformation(id: string, item: InformationCard): void {
-    throw new Error("Method not implemented.");
+    this._supabaseService.update(id, item).then(() => {
+      localStorage.removeItem('idCard');
+      this.processAllCardsInformation();
+    })
+    .catch(() => this._presenter.responseErrorMessages(this.errorMsn.errorUpdate));
   }
 
   processDeleteCardInformation(id: string): void {
@@ -37,14 +41,23 @@ export class CardAnimeInteractor implements CardAnimeInteractorLogic{
   }
 
   processCreateCardInformation(form: FormGroup): void {
-    this._supabaseService.create(form.value)
-      .then(() => {
+    this._supabaseService.create(form.value).then(() => {
         this.processAllCardsInformation();
       })
-      .catch(() => this._presenter.errorMessages(this.errorMsn.errorCreate));
+      .catch(() => this._presenter.responseErrorMessages(this.errorMsn.errorCreate));
   }
 
-  processByIdCardInformation(id: string): void {
-    throw new Error("Method not implemented.");
+  processByIdCardInformation(id: string): Promise<InformationCard | null> {
+    return new Promise((resolve) => {
+      this._supabaseService.getById(id)
+        .then((response: InformationCard | null) => {
+          resolve(response);
+          let card = response as unknown as InformationCard
+          this._presenter.responseCard(card);
+        })
+        .catch(() =>{
+          this._presenter.responseErrorMessages(this.errorMsn.errorGetId);
+        })
+    })
   }
 }

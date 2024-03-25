@@ -7,6 +7,9 @@ import { Component, Input } from "@angular/core";
     <img [src]="linkImg" class="card-img-top" [alt]="altName">
     <div class="card-body text-center">
       <h5 class="card-title">{{name}}</h5>
+      <div class="card-body">
+        <ng-content select="[buttons]"></ng-content>
+      </div>
     </div>
  </div>
 `

@@ -4,7 +4,7 @@ import { InformationCard } from '../../../domain/entity/information.card';
 import { CardAnimeInputLogic, CardAnimeOutputLogic } from '../view/model/card.anime.model';
 import { CardAnimeInteractor } from './../interactor/card.anime.interactor';
 import { Inject, Injectable } from "@angular/core";
-import { formCreateInformationCard } from '../../../core/constants/validators';
+import { formCreateInformationCard, formUpdateInformationCard } from '../../../core/constants/validators';
 
 @Injectable()
 export class CardAnimePresenter implements CardAnimeInputLogic{
@@ -30,15 +30,38 @@ export class CardAnimePresenter implements CardAnimeInputLogic{
     this._interactor.processAllCardsInformation();
   }
 
-  processResponseCards(response: InformationCard[]): void {
+  searchIdCard(id: string): void {
+    this._interactor.processByIdCardInformation(id);
+  }
+
+  responseCard(response: InformationCard | null): void {
+    this._view.cardInformation = response as any;
+  }
+
+  responseCards(response: InformationCard[]): void {
     this._view.cardsInformation = response;
   }
 
-  processCardCreate(form: FormGroup): void {
+  submitCardCreate(form: FormGroup): void {
     this._interactor.processCreateCardInformation(form);
   }
 
-  errorMessages(error: string): void {
+  submitCardUpdate(form: FormGroup, id: string): void {
+    console.log(id);
+    this._interactor.processUpdateCardInformation(id, form.value);
+  }
+
+  initFormUpdate(id: string): void {
+    console.log(id);
+    this._interactor.processByIdCardInformation(id)
+      .then((data) => {
+        let card = data as unknown as InformationCard;
+        this._view.form = this._formBuilder.group(formUpdateInformationCard(card))
+      })
+      .catch((error) => console.log(error));
+  }
+
+  responseErrorMessages(error: string): void {
     alert(`${error}`);
   }
 }

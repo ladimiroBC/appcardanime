@@ -1,4 +1,5 @@
-export const Actions = {
-  actionCreateForm: true,
-  actionUpdateForm: true
+export const ActionsButtons = {
+  actionCreateForm: 'create',
+  actionUpdateForm: 'update',
+  idCreate: '',
 }

@@ -3,7 +3,7 @@ import { FormGroup } from "@angular/forms";
 import { CoreInteractor } from "../../../../core/view/core.interactor";
 import { CorePresenter } from "../../../../core/view/core.presenter";
 import { InformationCard } from "../../../../domain/entity/information.card";
-import { Actions } from '../../../../core/constants/actions';
+import { ActionsButtons } from '../../../../core/constants/actions';
 
 export abstract class CardAnimeOutputLogic {
   cardInformation!: InformationCard;
@@ -11,15 +11,19 @@ export abstract class CardAnimeOutputLogic {
   form!: FormGroup;
   optionsModal = OptionsModal;
   optionsButton = OptionsButton;
-  actions = Actions;
+  actions = ActionsButtons;
 }
 
 export interface CardAnimeInputLogic extends CorePresenter {
   getAllCards(): void;
-  processResponseCards(response: InformationCard[]): void;
+  responseCards(response: InformationCard[]): void;
+  responseCard(response: InformationCard | null): void;
   initFormCreate(): void;
-  processCardCreate(form: FormGroup): void;
-  errorMessages(error: string): void;
+  initFormUpdate(id: string): void;
+  searchIdCard(id: string): void;
+  submitCardCreate(form: FormGroup): void;
+  submitCardUpdate(form: FormGroup, id: string): void;
+  responseErrorMessages(error: string): void;
 }
 
 export interface CardAnimeInteractorLogic extends CoreInteractor {
@@ -27,5 +31,5 @@ export interface CardAnimeInteractorLogic extends CoreInteractor {
   processUpdateCardInformation(id: string, item: InformationCard): void;
   processDeleteCardInformation(id: string): void;
   processCreateCardInformation(form: FormGroup): void;
-  processByIdCardInformation(id: string): void;
+  processByIdCardInformation(id: string): Promise<InformationCard | null>;
 }

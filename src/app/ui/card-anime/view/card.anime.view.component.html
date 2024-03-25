@@ -1,17 +1,15 @@
 <app-button
-[dataBsToggle]="optionsModal.dataBsToggle"
-[dataBsTarget]="optionsModal.dataBsTargetCreate">
+  [dataBsToggle]="optionsModal.dataBsToggle"
+  [dataBsTarget]="optionsModal.dataBsTargetCreate"
+  (click)="getActionCreate()" (click)="formInit('create', actions.idCreate)">
   <ng-container>
     <span>{{optionsButton.btnCreate}}</span>
   </ng-container>
 </app-button>
-<app-modal
-[idModal]="optionsModal.idModalCreate"
-[title]="optionsModal.titleCreate">
-  <ng-container form>
-    <app-form
-    [formCard]="form"
-    [actionCreateCard]="actions.actionCreateForm"
+<app-modal [idModal]="optionsModal.idModalCreate" [title]="optionsModal.titleCreate">
+  <ng-container *ngIf="form" form>
+    <app-form [formCard]="form"
+    [actionCreateCard]="getActionCreate()"
     (formCreateCard)="submitCreatedForm($event)">
     </app-form>
   </ng-container>
@@ -19,17 +17,42 @@
 <div class="container">
   <div class="row">
     @for (item of cardsInformation; track $index) {
-      <div class="col-md-3">
-        <app-card
-        [linkImg]="item.img"
-        [altName]="item.name"
-        [name]="item.name">
-        </app-card>
-      </div>
+    <div class="col-md-3">
+      <app-card [linkImg]="item.img!" [altName]="item.name!" [name]="item.name!">
+        <ng-container buttons>
+          <app-button
+            [dataBsToggle]="optionsModal.dataBsToggle"
+            [dataBsTarget]="optionsModal.dataBsTargetUpdate"
+            (click)="getActionUpdate()" (click)="formInit('update', item.id)">
+            <ng-container>
+              <span>{{optionsButton.btnUpdate}}</span>
+            </ng-container>
+          </app-button>
+          <app-modal [idModal]="optionsModal.idModalUpdate" [title]="optionsModal.titleUpdate">
+            <ng-container *ngIf="form" form>
+              <app-form [formCard]="form" [actionUpdateCard]="getActionUpdate()"
+                (formUpdateCard)="submitUpdateForm($event)">
+              </app-form>
+            </ng-container>
+          </app-modal>
+          <app-button
+            [dataBsToggle]="optionsModal.dataBsToggle"
+            [dataBsTarget]="optionsModal.dataBsTargetDetail"
+            (click)="getIdCard(item.id)">
+            <ng-container>
+              <span>{{optionsButton.btnDetail}}</span>
+            </ng-container>
+          </app-button>
+          <app-modal [idModal]="optionsModal.idModalDetail" [title]="optionsModal.titleDetail">
+            <ng-container detail>
+              <span>Autor: {{cardInformation.autor!}}</span><br>
+              <span>Gender: </span><br>
+              <span>Launch: </span><br>
+            </ng-container>
+          </app-modal>
+        </ng-container>
+      </app-card>
+    </div>
     }
   </div>
 </div>
-
-
-
-

@@ -1,20 +1,16 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { FormGroup } from "@angular/forms";
 
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html'
 })
-export class FormComponent implements OnInit{
+export class FormComponent {
   @Input() actionCreateCard!: boolean;
+  @Input() actionUpdateCard!: boolean;
   @Input() formCard!: FormGroup;
   @Output() formCreateCard = new EventEmitter<FormGroup>;
   @Output() formUpdateCard = new EventEmitter<FormGroup>;
-
-  ngOnInit(): void {
-    console.log(this.formCard);
-    console.log(this.actionCreateCard);
-  }
 
   sendForm(): FormGroup {
     return this.formCard;

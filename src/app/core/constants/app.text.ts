@@ -1,12 +1,15 @@
 export const OptionsModal = {
   titleCreate: 'Form Create',
   titleUpdate: 'Form Update',
+  titleDetail: 'Detail Card',
   idModalCreate: 'modalCreate',
   idModalUpdate: 'modalUpdate',
+  idModalDetail: 'modalDetail',
   dataBsToggle: 'modal',
   dataBsDismiss: 'modal',
   dataBsTargetCreate: '#modalCreate',
   dataBsTargetUpdate: '#modalUpdate',
+  dataBsTargetDetail: '#modalDetail',
   typeSubmit: 'submit'
 }
 
