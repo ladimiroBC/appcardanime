@@ -17,45 +17,67 @@ export class ApplicationCardSupabaseService implements ApplicationAnimeCardSupab
       this.env.supabase.publicKey);
   }
 
-  async getById(id: string): Promise<InformationCard | null> {
-    const { data } = await this.supabaseClient
+  async getById(id: string): Promise<InformationCard> {
+    try {
+      const { data } = await this.supabaseClient
       .from(this.tables.INFORMATION_CARD_TABLE)
       .select('*')
       .eq('id', id)
       .single();
 
-    return data as unknown as InformationCard;
+    return data;
+    } catch(error) {
+      throw error;
+    }
   }
 
   async create(item: InformationCard): Promise<InformationCard> {
-    const { data } = await this.supabaseClient
+    try {
+      const { data } = await this.supabaseClient
       .from(this.tables.INFORMATION_CARD_TABLE)
       .insert(item);
 
-    return data as unknown as InformationCard;
+    return data as any;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async getAll(): Promise<InformationCard[]> {
-    const { data } = await this.supabaseClient
+    try {
+      const { data } = await this.supabaseClient
       .from(this.tables.INFORMATION_CARD_TABLE)
       .select('*');
 
-    return data as unknown as InformationCard[];
+    return data as any;
+    } catch(error) {
+      throw error;
+    }
   }
 
-  async update(id: string, item: InformationCard): Promise<InformationCard | null> {
-    const { data } = await this.supabaseClient
+  async update(id: string, item: InformationCard): Promise<InformationCard> {
+    try {
+      const { data } = await this.supabaseClient
       .from(this.tables.INFORMATION_CARD_TABLE)
       .update(item)
       .eq('id', id);
 
-    return data as unknown as InformationCard;
+    return data as any;
+    } catch (error) {
+      throw error;
+    }
   }
 
   async delete(id: string): Promise<void> {
+    try {
       await this.supabaseClient
       .from(this.tables.INFORMATION_CARD_TABLE)
       .delete()
       .eq('id', id);
+
+    } catch (error) {
+      throw error;
+    }
+
   }
 }

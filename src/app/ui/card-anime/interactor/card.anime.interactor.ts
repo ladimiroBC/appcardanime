@@ -4,7 +4,6 @@ import { ApplicationCardSupabaseService } from "../../../application/services/ap
 import { InformationCard } from "../../../domain/entity/information.card";
 import { CardAnimeInputLogic, CardAnimeInteractorLogic } from "../view/model/card.anime.model";
 import { MessagesError } from "../../../core/constants/app.text";
-import { FormGroup } from "@angular/forms";
 
 @Injectable()
 export class CardAnimeInteractor implements CardAnimeInteractorLogic{
@@ -20,44 +19,43 @@ export class CardAnimeInteractor implements CardAnimeInteractorLogic{
     this._presenter = presenter;
   }
 
-  processAllCardsInformation(): void {
-    this._supabaseService.getAll()
-      .then((data: InformationCard[]) => {
-        this._presenter.responseCards(data);
-      })
-      .catch(() => this._presenter.responseErrorMessages(this.errorMsn.errorGetAll));
+  async processAllCardsInformation(): Promise<void> {
+    try {
+      const cards = await this._supabaseService.getAll();
+      this._presenter.responseCards(cards);
+    } catch {
+      this._presenter.responseErrorMessages(this.errorMsn.errorGetAll);
+    }
   }
 
-  processUpdateCardInformation(id: string, item: InformationCard): void {
-    this._supabaseService.update(id, item).then(() => {
-      localStorage.removeItem('idCard');
+  async processCreateCardInformation(card: InformationCard): Promise<void> {
+    try {
+      await this._supabaseService.create(card);
       this.processAllCardsInformation();
-    })
-    .catch(() => this._presenter.responseErrorMessages(this.errorMsn.errorUpdate));
+    } catch {
+      this._presenter.responseErrorMessages(this.errorMsn.errorCreate);
+    }
+  }
+
+  async processByIdCardInformation(id: string): Promise<void> {
+    try {
+      const card = await this._supabaseService.getById(id);
+      this._presenter.responseCard(card);
+    } catch {
+      this._presenter.responseErrorMessages(this.errorMsn.errorGetId);
+    }
+  }
+
+  async processUpdateCardInformation(id: string, card: InformationCard): Promise<void> {
+    try {
+      await this._supabaseService.update(id, card);
+      this.processAllCardsInformation();
+    } catch {
+      this._presenter.responseErrorMessages(this.errorMsn.errorUpdate);
+    }
   }
 
   processDeleteCardInformation(id: string): void {
-    throw new Error("Method not implemented.");
-  }
-
-  processCreateCardInformation(form: FormGroup): void {
-    this._supabaseService.create(form.value).then(() => {
-        this.processAllCardsInformation();
-      })
-      .catch(() => this._presenter.responseErrorMessages(this.errorMsn.errorCreate));
-  }
-
-  processByIdCardInformation(id: string): Promise<InformationCard | null> {
-    return new Promise((resolve) => {
-      this._supabaseService.getById(id)
-        .then((response: InformationCard | null) => {
-          resolve(response);
-          let card = response as unknown as InformationCard
-          this._presenter.responseCard(card);
-        })
-        .catch(() =>{
-          this._presenter.responseErrorMessages(this.errorMsn.errorGetId);
-        })
-    })
+    this._supabaseService.delete(id);
   }
 }

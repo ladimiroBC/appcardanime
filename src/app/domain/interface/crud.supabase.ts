@@ -1,7 +1,7 @@
 export interface CrudSupase<T> {
   getAll(): Promise<T[]>;
-  getById(id: string): Promise<T | null>;
-  create(item: T): Promise<T | null>;
-  update(id: string ,item: T): Promise<T | null>;
+  getById(id: string): Promise<T>;
+  create(item: T): Promise<T>;
+  update(id: string ,item: T): Promise<T>;
   delete(id: string): Promise<void>;
 }
