@@ -1,0 +1,17 @@
+@import '../variables/variables';
+
+$buttonWidth: 40px;
+$buttonHeight: 40px;
+$buttonBorderRadius: 100px;
+
+app-button {
+  &.buttonCreate {
+    button {
+      width: $buttonWidth;
+      height: $buttonHeight;
+      border: none;
+      border-radius: $buttonBorderRadius;
+      background-color: $primary;
+    }
+  }
+}

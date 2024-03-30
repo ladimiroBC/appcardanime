@@ -1,0 +1,20 @@
+$cardBorderRadius: 30px;
+$cardImgTopBorderRadius: 50px;
+$cardImgTopPadding: 20px;
+$cardBodyPadding: 25px;
+$cardBodyMarginTop: -15px;
+
+.card {
+  border-radius: $cardBorderRadius;
+}
+
+.card-img-top {
+  border-radius: $cardImgTopBorderRadius;
+  padding: $cardImgTopPadding;
+}
+
+.card-body {
+  padding: $cardBodyPadding;
+  margin-top: $cardBodyMarginTop;
+}
+

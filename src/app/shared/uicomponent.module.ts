@@ -2,16 +2,16 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { CardComponent } from "./uicomponents/card/card.component";
 import { ButtonComponent } from "./uicomponents/button/button.component";
-import { ModalComponent } from "./uicomponents/modal/modal.component";
 import { FormComponent } from "./uicomponents/form/form.component";
 import { ReactiveFormsModule } from "@angular/forms";
+import { IconComponent } from "./uicomponents/icon/icon.component";
 
 @NgModule({
   declarations: [
     CardComponent,
     ButtonComponent,
-    ModalComponent,
-    FormComponent
+    FormComponent,
+    IconComponent
   ],
   imports: [
     CommonModule,
@@ -20,8 +20,8 @@ import { ReactiveFormsModule } from "@angular/forms";
   exports: [
     CardComponent,
     ButtonComponent,
-    ModalComponent,
-    FormComponent
+    FormComponent,
+    IconComponent
   ]
 })
 export class UiComponentsModule { }

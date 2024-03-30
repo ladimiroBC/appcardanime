@@ -14,33 +14,42 @@ export class ApplicationCardHttpService implements ApplicationAnimeCardHttpClien
   private getHeaders(): HttpHeaders {
     return new HttpHeaders({
       'Content-Type': 'application/json',
-      'api-url': this.env.supabase.url,
-      'public-key': this.env.supabase.publicKey
+      'apiKey': this.env.headersApiSupabase.apikey,
+      'Authorization': this.env.headersApiSupabase.auth
+    });
+  }
+
+  private getHeadersAuth(): HttpHeaders {
+    return new HttpHeaders({
+      'Content-Type': 'application/json',
+      'apiKey': this.env.headersUserAuth.apikey,
+      'Authorization': this.env.headersUserAuth.auth
     });
   }
 
   getAll(): Observable<InformationCard[]> {
     const headers = this.getHeaders();
-    return this._http.get<InformationCard[]>(this.env.endPoints.getAll, { headers });
+    const cards = this._http.get<InformationCard[]>(this.env.endpoint.getAll, { headers });
+    return cards;
   }
 
   getById(id: string): Observable<InformationCard> {
     const headers = this.getHeaders();
-    return this._http.get<InformationCard>(this.env.endPoints.getById(id), { headers });
+    return this._http.get<InformationCard>(this.env.endpoint.getById(id), { headers });
   }
 
   create(item: InformationCard): Observable<InformationCard> {
-    const headers = this.getHeaders();
-    return this._http.post<InformationCard>(this.env.endPoints.create, item, { headers });
+    const headers = this.getHeadersAuth();
+    return this._http.post<InformationCard>(this.env.endpoint.create, item, { headers });
   }
 
   update(item: InformationCard, id: string): Observable<InformationCard> {
     const headers = this.getHeaders();
-    return this._http.put<InformationCard>(this.env.endPoints.update(id), item, { headers });
+    return this._http.put<InformationCard>(this.env.endpoint.update(id), item, { headers });
   }
 
   delete(id: string): Observable<boolean> {
     const headers = this.getHeaders();
-    return this._http.delete<boolean>(this.env.endPoints.delete(id), { headers });
+    return this._http.delete<boolean>(this.env.endpoint.delete(id), { headers });
   }
 }

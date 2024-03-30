@@ -1,10 +1,11 @@
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 import { IApplicationAnimeCard } from '../../../core/constants/app.card';
 import { InformationCard } from '../../../domain/entity/information.card';
 import { CardAnimeInputLogic, CardAnimeOutputLogic } from '../view/model/card.anime.model';
 import { CardAnimeInteractor } from './../interactor/card.anime.interactor';
 import { Inject, Injectable } from "@angular/core";
-import { formCreateInformationCard, formUpdateInformationCard } from '../../../core/constants/validators';
+import { ApplicationMessagesService } from '../../../common/utils/app.messages.service';
+import { timer } from 'rxjs';
 
 @Injectable()
 export class CardAnimePresenter implements CardAnimeInputLogic{
@@ -13,7 +14,8 @@ export class CardAnimePresenter implements CardAnimeInputLogic{
   constructor(
     @Inject(IApplicationAnimeCard.CardAnimeInteractorLogic)
     private _interactor: CardAnimeInteractor,
-    private _formBuilder: FormBuilder)
+    @Inject(IApplicationAnimeCard.ApplicationMessages)
+    private _toastService: ApplicationMessagesService,)
   {
     this._interactor.setPresenter(this);
   }
@@ -22,47 +24,38 @@ export class CardAnimePresenter implements CardAnimeInputLogic{
     this._view = component;
   }
 
-  initFormCreate(): void {
-    this._view.form = this._formBuilder.group(formCreateInformationCard);
-  }
-
   getAllCards(): void {
     this._interactor.processAllCardsInformation();
   }
 
-  searchIdCard(id: string): void {
-    this._interactor.processByIdCardInformation(id);
-  }
-
-  responseCard(response: InformationCard | null): void {
-    this._view.cardInformation = response as any;
-  }
-
   responseCards(response: InformationCard[]): void {
+    console.log(response);
     this._view.cardsInformation = response;
   }
 
-  submitCardCreate(form: FormGroup): void {
-    this._interactor.processCreateCardInformation(form);
+  saveCard(form: FormGroup): void {
+    this._interactor.processCreateCard(form.value);
   }
 
-  submitCardUpdate(form: FormGroup, id: string): void {
-    console.log(id);
-    this._interactor.processUpdateCardInformation(id, form.value);
+  updateCard(id: string, form: FormGroup<any>): void {
+    throw new Error('Method not implemented.');
   }
 
-  initFormUpdate(id: string): void {
-    console.log(id);
-    this._interactor.processByIdCardInformation(id)
-      .then((data) => {
-        let card = data as unknown as InformationCard;
-        this._view.form = this._formBuilder.group(formUpdateInformationCard(card))
-      })
-      .catch((error) => console.log(error));
+  responseMessagesSuccessfull(messages: string, title: string): void {
+    this._toastService.showMessagesSuccessfull(messages, title);
+    this.reoloadPage();
   }
 
-  responseErrorMessages(error: string): void {
-    alert(`${error}`);
+  responseMessagesError(messages: string, title: string): void {
+    this._toastService.showMessagesError(messages, title);
+    this.reoloadPage();
+  }
+
+  reoloadPage() {
+    const refresh = timer(3000);
+    refresh.subscribe(() => {
+      location.reload();
+    })
   }
 }
 

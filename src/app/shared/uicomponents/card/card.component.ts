@@ -12,7 +12,8 @@ import { Component, Input } from "@angular/core";
       </div>
     </div>
  </div>
-`
+`,
+styleUrls: ['./card.component.scss']
 })
 export class CardComponent {
   @Input() linkImg!: string;

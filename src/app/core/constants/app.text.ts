@@ -27,3 +27,10 @@ export const MessagesError = {
   errorDelete: 'Sorry, an error occurred during deletion.',
   errorGetId: 'Sorry, card not found'
 }
+
+export const ButtonTooltip = {
+  buttonCreate: 'Create card',
+  buttonUpdate: 'Update card',
+  buttonDetail: 'Detail card',
+  buttonDelete: 'Delete card'
+}

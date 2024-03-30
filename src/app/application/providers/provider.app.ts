@@ -4,6 +4,7 @@ import { ApplicationCardSupabaseService } from "../services/app.card.supabase.se
 import { ApplicationCardHttpService } from "../services/app.card.httpclient.service";
 import { CardAnimeInteractor } from "../../ui/card-anime/interactor/card.anime.interactor";
 import { CardAnimePresenter } from "../../ui/card-anime/presenter/card.anime.presenter";
+import { ApplicationMessagesService } from "../../common/utils/app.messages.service";
 
 export const ProviderApplicationSupabase: Provider = {
    provide: IApplicationAnimeCard.ApplicationAnimeCardSupabase,
@@ -23,4 +24,9 @@ export const ProviderCardAnimeInteractorLogic: Provider = {
 export const ProviderCardAnimeInputLogic: Provider = {
   provide: IApplicationAnimeCard.CardAnimeInputLogic,
   useClass: CardAnimePresenter
+}
+
+export const ProviderApplicationMessages: Provider = {
+  provide: IApplicationAnimeCard.ApplicationMessages,
+  useClass: ApplicationMessagesService
 }

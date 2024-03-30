@@ -1,0 +1,10 @@
+@import '../variables/variables';
+
+app-icon {
+  &.iconCreate {
+    i {
+      color: $light;
+    }
+  }
+}
+
