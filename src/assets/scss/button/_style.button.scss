@@ -1,17 +1,32 @@
 @import '../variables/variables';
-
-$buttonWidth: 40px;
-$buttonHeight: 40px;
-$buttonBorderRadius: 100px;
+@import '../mixins/buttons.scss';
 
 app-button {
   &.buttonCreate {
     button {
-      width: $buttonWidth;
-      height: $buttonHeight;
-      border: none;
-      border-radius: $buttonBorderRadius;
+      @include buttonsCard;
       background-color: $primary;
+    }
+  }
+
+  &.buttonUpdate {
+    button {
+      @include buttonsCard;
+      background-color: $warning;
+    }
+  }
+
+  &.buttonDetail {
+    button {
+      @include buttonsCard;
+      background-color: $success;
+    }
+  }
+
+  &.buttonDelete {
+    button {
+      @include buttonsCard;
+      background-color: $danger;
     }
   }
 }

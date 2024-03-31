@@ -43,9 +43,9 @@ export class ApplicationCardHttpService implements ApplicationAnimeCardHttpClien
     return this._http.post<InformationCard>(this.env.endpoint.create, item, { headers });
   }
 
-  update(item: InformationCard, id: string): Observable<InformationCard> {
-    const headers = this.getHeaders();
-    return this._http.put<InformationCard>(this.env.endpoint.update(id), item, { headers });
+  update(id: string, item: InformationCard): Observable<InformationCard> {
+    const headers = this.getHeadersAuth();
+    return this._http.patch<InformationCard>(this.env.endpoint.update(id), item, { headers });
   }
 
   delete(id: string): Observable<boolean> {

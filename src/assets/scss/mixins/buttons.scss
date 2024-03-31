@@ -1,0 +1,13 @@
+$buttonsCardWidth: 40px;
+$buttonsCardHeight: 40px;
+$buttonsCardBorder: none;
+$buttonsCardBorderRadius: 100px;
+$buttonsCardMargin: 4px;
+
+@mixin buttonsCard {
+  width: $buttonsCardWidth;
+  height: $buttonsCardHeight;
+  margin: $buttonsCardMargin;
+  border: $buttonsCardBorder;
+  border-radius: $buttonsCardBorderRadius;
+}

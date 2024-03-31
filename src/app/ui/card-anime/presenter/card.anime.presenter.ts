@@ -5,7 +5,6 @@ import { CardAnimeInputLogic, CardAnimeOutputLogic } from '../view/model/card.an
 import { CardAnimeInteractor } from './../interactor/card.anime.interactor';
 import { Inject, Injectable } from "@angular/core";
 import { ApplicationMessagesService } from '../../../common/utils/app.messages.service';
-import { timer } from 'rxjs';
 
 @Injectable()
 export class CardAnimePresenter implements CardAnimeInputLogic{
@@ -29,7 +28,6 @@ export class CardAnimePresenter implements CardAnimeInputLogic{
   }
 
   responseCards(response: InformationCard[]): void {
-    console.log(response);
     this._view.cardsInformation = response;
   }
 
@@ -37,25 +35,24 @@ export class CardAnimePresenter implements CardAnimeInputLogic{
     this._interactor.processCreateCard(form.value);
   }
 
-  updateCard(id: string, form: FormGroup<any>): void {
-    throw new Error('Method not implemented.');
+  getByIdCard(id: string): void {
+    this._interactor.processByIdCard(id);
+  }
+
+  responseByIdCard(response: InformationCard): void {
+    this._view.cardInformation = response;
+  }
+
+  updateCard(id: string, form: FormGroup): void {
+    this._interactor.processUpdateCard(id, form.value);
   }
 
   responseMessagesSuccessfull(messages: string, title: string): void {
     this._toastService.showMessagesSuccessfull(messages, title);
-    this.reoloadPage();
   }
 
   responseMessagesError(messages: string, title: string): void {
     this._toastService.showMessagesError(messages, title);
-    this.reoloadPage();
-  }
-
-  reoloadPage() {
-    const refresh = timer(3000);
-    refresh.subscribe(() => {
-      location.reload();
-    })
   }
 }
 

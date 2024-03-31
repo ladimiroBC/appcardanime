@@ -44,7 +44,51 @@ export class CardAnimeViewComponent extends CardAnimeOutputLogic implements  OnI
   }
 
   createCard(form: FormGroup) {
-    this.modalRef!.hide();
     this._presenter.saveCard(form);
+    this.modalRef!.hide();
+  }
+
+  initFormUpdate(id: string, formUpdate: TemplateRef<void>) {
+    this.idCard = id;
+    this.openModalUpdate(formUpdate);
+    this._presenter.getByIdCard(id);
+    this.formInitUpdate();
+  }
+
+  openModalUpdate(formUpdate: TemplateRef<void>) {
+    this.modalRef = this._modalService.show(formUpdate);
+  }
+
+  formInitUpdate() {
+    this.form = this._formBuilder.group(formCreateInformationCard);
+    this.form.patchValue({
+      name: this.cardInformation?.name,
+      autor: this.cardInformation?.autor,
+      launch: this.cardInformation?.launch,
+      gender: this.cardInformation?.gender,
+      img: this.cardInformation?.img
+    })
+  }
+
+  updateCard(form: FormGroup) {
+    this._presenter.updateCard(this.idCard, form);
+    this.modalRef!.hide();
+  }
+
+  detailCard(id: string, card: TemplateRef<void>) {
+    this.openModalDetail(card);
+    this._presenter.getByIdCard(id)
+  }
+
+  openModalDetail(card: TemplateRef<void>) {
+    this.modalRef = this._modalService.show(card);
+  }
+
+  deleteCard(card: TemplateRef<void>) {
+
+  }
+
+  onConfirmDelete(id: string) {
+
   }
 }

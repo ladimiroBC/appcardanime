@@ -6,12 +6,12 @@ import { InformationCard } from "../../../../domain/entity/information.card";
 import { Actions } from '../../../../core/constants/actions';
 import { Icon } from '../../../../core/constants/app.styles';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { Observable } from 'rxjs';
 
 export abstract class CardAnimeOutputLogic {
-  cardInformation!: InformationCard;
+  cardInformation?: InformationCard;
   cardsInformation!: InformationCard[];
   form!: FormGroup;
+  idCard!: string;
   optionsModal = OptionsModal;
   optionsButton = OptionsButton;
   actions = Actions;
@@ -24,6 +24,8 @@ export interface CardAnimeInputLogic extends CorePresenter {
   getAllCards(): void;
   responseCards(response: InformationCard[]): void;
   saveCard(form: FormGroup): void;
+  getByIdCard(id: string): void;
+  responseByIdCard(response: InformationCard): void;
   updateCard(id:string, form: FormGroup): void;
   responseMessagesSuccessfull(messages: string, title: string): void;
   responseMessagesError(messages: string, title: string): void;

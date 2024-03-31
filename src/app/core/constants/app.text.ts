@@ -2,15 +2,10 @@ export const OptionsModal = {
   titleCreate: 'Form Create',
   titleUpdate: 'Form Update',
   titleDetail: 'Detail Card',
-  idModalCreate: 'modalCreate',
-  idModalUpdate: 'modalUpdate',
-  idModalDetail: 'modalDetail',
-  dataBsToggle: 'modal',
-  dataBsDismiss: 'modal',
-  dataBsTargetCreate: '#modalCreate',
-  dataBsTargetUpdate: '#modalUpdate',
-  dataBsTargetDetail: '#modalDetail',
-  typeSubmit: 'submit'
+  titleDelete: 'Card Deletion Confirmation',
+  questionDelete: 'Are you sure you want to delete this card?',
+  buttonCancelDelete: 'Cancel',
+  buttonConfirmDelete: 'Confirm',
 }
 
 export const OptionsButton = {
