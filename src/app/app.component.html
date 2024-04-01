@@ -1,1 +1,14 @@
-<h2>{{title}}</h2>
+<app-navbar
+[home]="optionsNavbar.home"
+[signIn]="optionsNavbar.signIn"
+[signUp]="optionsNavbar.signUp"
+[logout]="optionsNavbar.logout">
+</app-navbar>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
+

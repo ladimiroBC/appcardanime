@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { OptionsMenubar } from './core/constants/app.text';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,5 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'apianime';
+  optionsNavbar = OptionsMenubar;
 }

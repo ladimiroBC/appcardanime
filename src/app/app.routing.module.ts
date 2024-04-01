@@ -1,7 +1,9 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 
-export const appRoutes: Routes = [];
+export const appRoutes: Routes = [
+  {path: '', loadChildren: () => import('./ui/ui.module').then(m => m.UiModule)}
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(appRoutes)],
