@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { OptionsMenubar } from './core/constants/app.text';
+import { TextOptionsMenubar } from './core/constants/app.text';
 
 @Component({
   selector: 'app-root',
@@ -7,5 +7,5 @@ import { OptionsMenubar } from './core/constants/app.text';
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  optionsNavbar = OptionsMenubar;
+  optionsNavbar = TextOptionsMenubar;
 }

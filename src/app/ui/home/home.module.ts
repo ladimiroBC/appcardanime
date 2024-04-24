@@ -2,7 +2,7 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { HomeComponent } from "./view/home.component";
 import { RouterModule } from "@angular/router";
-import { homeRounting } from "./home.routing.module";
+import { homeRounting } from "./home.routing";
 
 
 @NgModule({

@@ -1,0 +1,29 @@
+<section class="auth-form mt-3">
+  <div class="text-center">
+    <h3 class="h3">{{textForm.formSignUp}}</h3>
+  </div>
+  <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <input type="email"
+      placeholder="Email"
+      class="form-control"
+      formControlName="email"
+      id="email"
+      aria-describedby="emailHelp">
+    </div>
+    <div class="mb-3">
+      <input type="password"
+      placeholder="Password"
+      class="form-control"
+      formControlName="password"
+      id="password">
+    </div>
+    <div class="d-grid">
+      <button type="submit" class="btn btn-primary">{{textForm.buttonSignUp}}</button>
+    </div>
+  </form>
+  <a [routerLink]="['/sign-in']" class="text-black">
+    {{textForm.account}} <small>{{textForm.signIn}}</small>
+  </a>
+</section>
+

@@ -2,7 +2,8 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { SignInComponent } from "./view/sign.in.component";
 import { RouterModule } from "@angular/router";
-import { signInRounting } from "./sign.in.routing.module";
+import { signInRounting } from "./sign.in.routing";
+import { UiComponentsModule } from "../../../shared/ui.components.module";
 
 @NgModule({
   declarations: [
@@ -10,6 +11,7 @@ import { signInRounting } from "./sign.in.routing.module";
   ],
   imports: [
     CommonModule,
+    UiComponentsModule,
     RouterModule.forChild(signInRounting)
   ],
   exports: [

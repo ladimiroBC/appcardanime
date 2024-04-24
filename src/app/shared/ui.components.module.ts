@@ -5,14 +5,14 @@ import { RouterLink } from "@angular/router";
 
 @NgModule({
   declarations: [
-    NavbarComponent
+    NavbarComponent,
   ],
   imports: [
     CommonModule,
     RouterLink
   ],
   exports: [
-    NavbarComponent
+    NavbarComponent,
   ]
 })
 export class UiComponentsModule { }
